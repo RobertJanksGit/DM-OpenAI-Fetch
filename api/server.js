@@ -7,7 +7,7 @@ const server = express();
 
 server.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://dungeon-master-pro.firebaseapp.com/",
     methods: ["GET", "POST"],
     credentials: true,
   })
