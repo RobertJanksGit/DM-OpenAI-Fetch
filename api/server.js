@@ -5,15 +5,18 @@ const cors = require("cors");
 
 const server = express();
 
-server.use(
+process.env.PORT ? server.use(
   cors({
-    origin: process.env.PORT
-      ? "https://dungeon-master-pro.firebaseapp.com"
-      : "http://localhost:5173/",
+    origin: "https://dungeon-master-pro.firebaseapp.com",
     methods: ["GET", "POST"],
     credentials: true,
   })
-);
+) : cors({
+    origin: "http://localhost:5173",
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+)
 
 server.use(express.json({ limit: "10mb" }));
 server.use(express.urlencoded({ limit: "10mb", extended: true }));
