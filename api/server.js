@@ -5,9 +5,20 @@ const cors = require("cors");
 
 const server = express();
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://dungeon-master-pro.firebaseapp.com",
+];
+
 server.use(
   cors({
-    origin: "https://dungeon-master-pro.firebaseapp.com",
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST"],
     credentials: true,
   })
